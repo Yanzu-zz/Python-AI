@@ -8,7 +8,7 @@ class LogisticRegression:
         # coefficient 系数
         self.coef_ = None
         # 截距
-        self.interception_ = None
+        self.intercept_ = None
         # θ，是私有变量
         self._theta = None
 
@@ -55,12 +55,12 @@ class LogisticRegression:
         initial_theta = np.zeros(X_b.shape[1])
         self._theta = gradient_descent(X_b, y_train, initial_theta, eta)
 
-        self.interception_ = self._theta[0]
+        self.intercept_ = self._theta[0]
         self.coef_ = self._theta[1:]
 
     def predict_proba(self, X_predict):
         """ 给定待预测数据集，返回表示 X_predict 的结果概论向量 """
-        assert self.interception_ is not None and self.coef_ is not None
+        assert self.intercept_ is not None and self.coef_ is not None
         assert X_predict.shape[1] == len(self.coef_)
 
         X_b = np.hstack([np.ones((len(X_predict), 1)), X_predict])
@@ -69,7 +69,7 @@ class LogisticRegression:
 
     def predict(self, X_predict):
         """ 给定待预测数据集，返回表示 X_predict 的结果概论向量 """
-        assert self.interception_ is not None and self.coef_ is not None
+        assert self.intercept_ is not None and self.coef_ is not None
         assert X_predict.shape[1] == len(self.coef_)
 
         proba = self.predict_proba(X_predict)

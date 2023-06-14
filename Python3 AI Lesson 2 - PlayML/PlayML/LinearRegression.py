@@ -8,7 +8,7 @@ class LinearRegression:
         # coefficient 系数
         self.coef_ = None
         # 截距
-        self.interception_ = None
+        self.intercept_ = None
         # θ，是私有变量
         self._theta = None
 
@@ -21,7 +21,7 @@ class LinearRegression:
         # 正规军数学公式，套用就行
         self._theta = np.linalg.inv(X_b.T.dot(X_b)).dot(X_b.T).dot(y_train)
 
-        self.interception_ = self._theta[0]
+        self.intercept_ = self._theta[0]
         self.coef_ = self._theta[1:]
 
         return self
@@ -69,7 +69,7 @@ class LinearRegression:
         initial_theta = np.zeros(X_b.shape[1])
         self._theta = gradient_descent(X_b, y_train, initial_theta, eta)
 
-        self.interception_ = self._theta[0]
+        self.intercept_ = self._theta[0]
         self.coef_ = self._theta[1:]
 
     # 随机梯度下降法函数
@@ -101,11 +101,11 @@ class LinearRegression:
         initial_theta = np.zeros(X_b.shape[1])
         self._theta = sgd(X_b, y_train, initial_theta, n_iters, t0, t1)
 
-        self.interception_ = self._theta[0]
+        self.intercept_ = self._theta[0]
         self.coef_ = self._theta[1:]
 
     def predict(self, X_predict):
-        assert self.interception_ is not None and self.coef_ is not None
+        assert self.intercept_ is not None and self.coef_ is not None
         assert X_predict.shape[1] == len(self.coef_)
 
         X_b = np.hstack([np.ones((len(X_predict), 1)), X_predict])
