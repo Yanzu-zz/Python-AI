@@ -133,21 +133,20 @@ print(cos_similarity(c0, c1))
 
 most_similar('you', word_to_id, id_to_word, C, top=5)
 
-
 # 转换共现矩阵为 PPMI 矩阵
-W=ppmi(C)
+W = ppmi(C)
 np.set_printoptions(precision=3)
 print('covariance matrix')
 print(C)
-print('-'*50)
+print('-' * 50)
 print('PPMI')
 print(W)
 
 # 基于 SVD（Singular Value Decomposition） 的降维
-U,S,V=np.linalg.svd(W)
+U, S, V = np.linalg.svd(W)
 
 # 使用对应的前 n 个数据就进行了降维
 for word, word_id in word_to_id.items():
-    plt.annotate(word,(U[word_id,0],U[word_id,1]))
-plt.scatter(U[:,0],U[:,1],alpha=0.5)
+    plt.annotate(word, (U[word_id, 0], U[word_id, 1]))
+plt.scatter(U[:, 0], U[:, 1], alpha=0.5)
 plt.show()
