@@ -1,6 +1,7 @@
 # coding: utf-8
 from common.config import GPU
 
+GPU = True
 
 if GPU:
     import cupy as np

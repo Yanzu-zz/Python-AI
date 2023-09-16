@@ -1,8 +1,8 @@
 import numpy as np
 from negative_sampling_layer import *
 
-import sys, os
 
+import sys, os
 sys.path.append(os.pardir)
 
 
@@ -21,7 +21,7 @@ class CBOW:
         self.in_layers = []
         # 这样写就可以兼容 window_size > 1 的情况
         # 也就是可以有多个上下文
-        for i in range(window_size << 1):
+        for i in range(window_size * 2):
             layer = Embedding(W_in)
             self.in_layers.append(layer)
         # 此时这里是二分类 sigmoid+负采样
@@ -31,7 +31,7 @@ class CBOW:
         layers = self.in_layers + [self.ns_loss]
         self.params, self.grads = [], []
         for layer in layers:
-            self.parms += layer.params
+            self.params += layer.params
             self.grads += layer.grads
 
         # 将单词的分布式表示设置为成员变量

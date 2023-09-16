@@ -3,7 +3,7 @@ import numpy as np
 import sys, os
 
 sys.path.append(os.pardir)
-from common.layers import SigmoidWithLoss, EmbeddingDot
+from common.layers import SigmoidWithLoss
 
 
 # Embedding 层可以替换掉 CBOW 输出侧的 MatMul 层了
@@ -18,7 +18,7 @@ class Embedding:
     def forward(self, idx):
         W, = self.params
         self.idx = idx
-        out = W[idx]
+        out = W[idx.get()]
         return out
 
     def backward(self, dout):
@@ -32,6 +32,7 @@ class Embedding:
         np.add.at(dW, self.idx, dout)
 
         return None
+
 
 class UnigramSampler:
     def __init__(self, corpus, power, sample_size):
@@ -64,7 +65,7 @@ class UnigramSampler:
             for i in range(batch_size):
                 p = self.word_p.copy()
                 target_idx = target[i]
-                p[target_idx] = 0
+                p[target_idx.get()] = 0
                 p /= p.sum()
                 negative_sample[i, :] = np.random.choice(self.vocab_size, size=self.sample_size, replace=False, p=p)
         else:
@@ -74,6 +75,30 @@ class UnigramSampler:
                                                replace=True, p=self.word_p)
 
         return negative_sample
+
+
+class EmbeddingDot:
+    def __init__(self, W):
+        self.embed = Embedding(W)
+        self.params = self.embed.params
+        self.grads = self.embed.grads
+        self.cache = None
+
+    def forward(self, h, idx):
+        target_W = self.embed.forward(idx)
+        out = np.sum(target_W * h, axis=1)
+
+        self.cache = (h, target_W)
+        return out
+
+    def backward(self, dout):
+        h, target_W = self.cache
+        dout = dout.reshape(dout.shape[0], 1)
+
+        dtarget_W = dout * h
+        self.embed.backward(dtarget_W)
+        dh = dout * target_W
+        return dh
 
 
 class NegativeSamplingLoss:
@@ -102,7 +127,7 @@ class NegativeSamplingLoss:
         for i in range(self.sample_size):
             negative_target = negative_sample[:, i]
             score = self.embed_dot_layers[1 + i].forward(h, negative_target)
-            loss = self.loss_layers[1 + i].forward(score, negative_label)
+            loss += self.loss_layers[1 + i].forward(score, negative_label)
 
         return loss
 

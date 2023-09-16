@@ -1,17 +1,17 @@
-import numpy as np
+# import numpy as np
 from cbow import CBOW
+import pickle
 
 import sys, os
 
-sys.path.append(os.pardir)
-
+sys.path.append('..')
 from common import config
-
-import pickle
+from common import np
 from common.trainer import Trainer
 from common.optimizer import Adam
 from common.util import create_contexts_target, to_cpu, to_gpu
 from dataset import ptb
+
 
 # 初始化超参数
 window_size = 5
