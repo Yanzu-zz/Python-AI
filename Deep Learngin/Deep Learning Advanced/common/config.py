@@ -1,4 +1,4 @@
 # coding: utf-8
 
-# GPU = False
-GPU = True
+GPU = False
+# GPU = True
