@@ -24,3 +24,8 @@ p2 = [0.7, 0.1, 0.1, 0.01, 0.09]
 new_p2 = np.power(p2, 0.75)
 new_p2 /= np.sum(new_p2)
 print(new_p2)
+
+
+arr12 = [1,2,3,4,5,6,7,8]
+print(arr12[:-1])
+print(arr12[1:])
