@@ -66,5 +66,9 @@ class BetterRnnlm(BaseModel):
         return dout
 
     def reset_state(self):
+<<<<<<< HEAD
         for layer in self.layers:
+=======
+        for layer in reversed(self.layers):
+>>>>>>> e37a8347be715fafbf157060a9adcef281862ac1
             layer.reset_state()

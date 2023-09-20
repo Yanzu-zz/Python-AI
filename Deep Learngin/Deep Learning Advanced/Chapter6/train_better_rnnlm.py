@@ -37,6 +37,10 @@ trainer = RnnlmTrainer(model, optimizer)
 best_ppl = float('inf')
 for epoch in range(max_epoch):
     trainer.fit(xs, ts, max_epoch=1, batch_size=batch_size, time_size=time_size, max_grad=max_grad)
+<<<<<<< HEAD
+=======
+
+>>>>>>> e37a8347be715fafbf157060a9adcef281862ac1
     model.reset_state()
     ppl = eval_perplexity(model, corpus_val)
     print('valid perplexity: ', ppl)
