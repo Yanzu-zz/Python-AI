@@ -1,8 +1,10 @@
 # coding: utf-8
+from seq2seq import Seq2seq, Encoder
+
 import sys
 sys.path.append('..')
+
 from common.time_layers import *
-from seq2seq import Seq2seq, Encoder
 
 
 class PeekyDecoder:
