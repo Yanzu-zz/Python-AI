@@ -20,3 +20,4 @@ venv
 dataset
 *_data
 *.pth
+data/
