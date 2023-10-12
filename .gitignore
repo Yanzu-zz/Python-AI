@@ -21,3 +21,6 @@ dataset
 *_data
 *.pth
 data/
+mnist/
+MNIST/
+*.pkl
