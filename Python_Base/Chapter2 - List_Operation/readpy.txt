@@ -1,0 +1,6 @@
+x = 1
+y = 2 # sadfasjf
+z = x + y
+c = [1, 6, 9]
+
+print(z, c)
