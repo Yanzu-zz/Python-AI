@@ -24,3 +24,7 @@ data/
 mnist/
 MNIST/
 *.pkl
+cifar-10-batches-py/
+*.pt
+TEST/
+TRAIN/
