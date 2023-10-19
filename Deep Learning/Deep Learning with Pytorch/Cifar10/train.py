@@ -4,6 +4,9 @@ import torch
 import torch.nn as nn
 import torchvision
 from vggnet import VGGNet
+from resnet import resnet
+from mobilenetv1 import mobilenetv1_small
+from inceptionMoldule import InceptionNetSmall
 from load_cifar10 import train_loader, test_loader
 import tensorboardX
 
@@ -14,7 +17,10 @@ if __name__ == '__main__':
     epoch_num = 1
     lr = 0.01
     batch_size = 128
-    net = VGGNet()
+    # net = VGGNet()
+    # net = resnet()
+    # net = mobilenetv1_small()
+    net = InceptionNetSmall()
     # net = net.to(device)
 
     # loss
