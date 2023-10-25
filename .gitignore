@@ -28,3 +28,5 @@ cifar-10-batches-py/
 *.pt
 TEST/
 TRAIN/
+datasets/
+apple2orange/
