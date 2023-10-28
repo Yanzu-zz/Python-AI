@@ -3,7 +3,7 @@ from Convolution import *
 import sys, os
 
 sys.path.append(os.pardir)
-from dataset.mnist import load_mnist
+from data_processing.mnist import load_mnist
 from common.trainer import Trainer
 
 # 读入数据

@@ -7,7 +7,7 @@ from common import config
 from common.optimizer import SGD
 from common.trainer import RnnlmTrainer
 from common.util import eval_perplexity
-from dataset import ptb
+from data_processing import ptb
 
 # 超参数
 batch_size = 20

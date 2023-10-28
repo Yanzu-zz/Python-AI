@@ -4,7 +4,7 @@ import sys, os
 
 sys.path.append(os.pardir)
 from common.util import most_similar, create_co_matrix, ppmi
-from dataset import ptb
+from data_processing import ptb
 
 window_size = 2
 wordvec_size = 100

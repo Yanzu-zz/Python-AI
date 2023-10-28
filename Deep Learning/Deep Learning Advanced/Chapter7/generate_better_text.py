@@ -3,7 +3,7 @@ from rnnlm_gen import BetterRnnlmGen
 import sys
 sys.path.append('..')
 from common.np import *
-from dataset import ptb
+from data_processing import ptb
 
 
 corpus, word_to_id, id_to_word = ptb.load_data('train')

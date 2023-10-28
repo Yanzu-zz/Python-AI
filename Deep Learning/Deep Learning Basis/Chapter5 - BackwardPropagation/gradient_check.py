@@ -2,7 +2,7 @@ import sys, os
 
 sys.path.append(os.pardir)
 import numpy as np
-from dataset.mnist import load_mnist
+from data_processing.mnist import load_mnist
 from two_layer_net_ch5 import TwoLayerNet
 
 # 读入数据

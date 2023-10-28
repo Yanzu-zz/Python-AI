@@ -3,7 +3,7 @@ import pickle
 import numpy as np
 
 sys.path.append(os.pardir)
-from dataset.mnist import load_mnist
+from data_processing.mnist import load_mnist
 
 
 def sigmoid(x):

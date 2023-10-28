@@ -6,7 +6,7 @@ import sys, os
 sys.path.append(os.pardir)
 import numpy as np
 # from common.optimizer import SGD
-from dataset import spiral
+from data_processing import spiral
 from common.trainer import Trainer
 
 """ 开始训练（不用 Trainer） """
