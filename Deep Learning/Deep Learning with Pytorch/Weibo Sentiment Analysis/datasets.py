@@ -28,7 +28,7 @@ def load_data(data_path, data_stop_path):
     voc_dict = {}
     data = []
     max_len_seq = 0
-    for item in data_list[:100]:
+    for item in data_list[:150]:
         label = item[0]
         # item[1] 是逗号
         content = item[2:].strip()
@@ -88,9 +88,8 @@ class textCls(Dataset):
         return label, data
 
 
-def data_loader(data_path, data_stop_path, dict_path):
-    dataset = textCls(dict_path, data_path, data_stop_path)
-    return DataLoader(dataset, batch_size=10, shuffle=True)
+def data_loader(dataset, config):
+    return DataLoader(dataset, batch_size=config.batch_size, shuffle=config.is_shuffle)
 
 
 if __name__ == "__main__":
