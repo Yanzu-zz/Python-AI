@@ -25,8 +25,8 @@ label_name = [
 ]
 
 # save_path = './TRAIN'
-save_path = './TEST'
 # data_list = glob.glob('./cifar-10-batches-py/data_batch_*')
+save_path = './TEST'
 data_list = glob.glob('./cifar-10-batches-py/test_batch')
 # print(data_list)
 
