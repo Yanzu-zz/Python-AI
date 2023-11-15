@@ -32,3 +32,4 @@ datasets/
 apple2orange/
 hit_stopword
 dict
+*.txt
