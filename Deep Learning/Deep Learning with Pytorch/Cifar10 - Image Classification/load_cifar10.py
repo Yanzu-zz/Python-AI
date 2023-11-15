@@ -38,6 +38,7 @@ test_transform = transforms.Compose([
 ])
 
 
+# 各种数据增强方法
 # train_transform = transforms.Compose([
 #     # 裁剪一下
 #     transforms.RandomResizedCrop((28, 28)),
@@ -50,7 +51,8 @@ test_transform = transforms.Compose([
 #     # 颜色增强
 #     transforms.ColorJitter(0.3, 0.3, 0.3, 0.3),
 #     # 转换成张量
-#     transforms.ToTensor()
+#     transforms.ToTensor(),
+#     transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010))
 # ])
 
 

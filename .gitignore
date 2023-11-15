@@ -28,3 +28,7 @@ cifar-10-batches-py/
 *.pt
 TEST/
 TRAIN/
+datasets/
+apple2orange/
+hit_stopword
+dict

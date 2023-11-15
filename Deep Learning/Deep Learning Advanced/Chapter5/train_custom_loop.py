@@ -6,7 +6,7 @@ import sys, os
 sys.path.append(os.pardir)
 
 from common.optimizer import SGD
-from dataset import ptb
+from data_processing import ptb
 from simple_rnnlm import SimpleRnnlm
 
 # 超参数

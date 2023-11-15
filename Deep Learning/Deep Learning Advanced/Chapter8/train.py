@@ -2,7 +2,7 @@ import sys
 
 sys.path.append('..')
 import numpy as np
-from dataset import sequence
+from data_processing import sequence
 from common.optimizer import Adam
 from common.trainer import Trainer
 from common.util import eval_seq2seq

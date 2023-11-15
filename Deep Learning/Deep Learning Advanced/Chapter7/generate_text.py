@@ -2,7 +2,7 @@ from rnnlm_gen import RnnlmGen
 import sys, os
 
 sys.path.append(os.pardir)
-from dataset import ptb
+from data_processing import ptb
 
 corpus, word_to_id, id_to_word = ptb.load_data('train')
 vocab_size = len(word_to_id)

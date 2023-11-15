@@ -10,7 +10,7 @@ from common import np
 from common.trainer import Trainer
 from common.optimizer import Adam
 from common.util import create_contexts_target, to_cpu, to_gpu
-from dataset import ptb
+from data_processing import ptb
 
 
 # 初始化超参数
