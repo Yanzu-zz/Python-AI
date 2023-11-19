@@ -21,11 +21,11 @@ if __name__ == '__main__':
 
     # networks
     # 两个生成器
-    netG_A2B = Generator()
-    netG_B2A = Generator()
+    netG_A2B = Generator().to(device)
+    netG_B2A = Generator().to(device)
     # 两个判别器
-    netD_A = Discriminator()
-    netD_B = Discriminator()
+    netD_A = Discriminator().to(device)
+    netD_B = Discriminator().to(device)
 
     # netG_A2B.to(device)
     # netG_B2A.to(device)
@@ -60,14 +60,14 @@ if __name__ == '__main__':
 
     # training
     data_root = "./datasets/apple2orange"
-    input_A = torch.ones([1, 3, size, size], dtype=torch.float)
-    input_B = torch.ones([1, 3, size, size], dtype=torch.float)
+    input_A = torch.ones([1, 3, size, size], dtype=torch.float).to(device)
+    input_B = torch.ones([1, 3, size, size], dtype=torch.float).to(device)
     # input_A.to(device)
     # input_B.to(device)
 
     # 正确的标签
-    label_real = torch.ones([1], requires_grad=False, dtype=torch.float)
-    label_fake = torch.zeros([1], requires_grad=False, dtype=torch.float)
+    label_real = torch.ones([1], requires_grad=False, dtype=torch.float).to(device)
+    label_fake = torch.zeros([1], requires_grad=False, dtype=torch.float).to(device)
     # label_real.to(device)
     # label_fake.to(device)
 
@@ -90,14 +90,15 @@ if __name__ == '__main__':
     ]
 
     # 用官方写好的数据加载器轮子（能帮我们打乱数据以及利用多核加速之类的功能）
-    dataloader = DataLoader(ImageDataset(data_root, transforms_), batch_size=batchsize, shuffle=True, num_workers=4)
+    dataloader = DataLoader(ImageDataset(data_root, transforms_),
+                            batch_size=batchsize, shuffle=True, num_workers=16)
     step = 0
 
     for epoch in range(n_epoch):
         for i, batch in enumerate(dataloader):
             # print(i, batch)
-            real_A = torch.tensor(input_A.copy_(batch['A']), dtype=torch.float)
-            real_B = torch.tensor(input_B.copy_(batch['B']), dtype=torch.float)
+            real_A = torch.tensor(input_A.copy_(batch['A']), dtype=torch.float).to(device)
+            real_B = torch.tensor(input_B.copy_(batch['B']), dtype=torch.float).to(device)
             # real_A.to(device)
             # real_B.to(device)
 
@@ -169,9 +170,10 @@ if __name__ == '__main__':
             opt_DB.step()
 
             # 打印对应的 loss
+            print("Epoch is: {}".format(epoch))
             print("loss_G: {}, loss_G_identity: {}, loss_G_GAN: {}"
                   .format(loss_G, loss_identity_A + loss_identity_B, loss_GAN_A2B + loss_GAN_B2A))
-            print("loss_G_cycle: {}, loss_D_A: {}, loss_D_B: {}"
+            print("loss_G_cycle: {}, loss_D_A: {}, loss_D_B: {}\n"
                   .format(loss_cycle_ABA + loss_cycle_BAB, loss_D_A, loss_D_B))
 
             # 将 loss 存入 log 中
