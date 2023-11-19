@@ -90,7 +90,8 @@ if __name__ == '__main__':
     ]
 
     # 用官方写好的数据加载器轮子（能帮我们打乱数据以及利用多核加速之类的功能）
-    dataloader = DataLoader(ImageDataset(data_root, transforms_), batch_size=batchsize, shuffle=True, num_workers=4)
+    dataloader = DataLoader(ImageDataset(data_root, transforms_),
+                            batch_size=batchsize, shuffle=True, num_workers=4)
     step = 0
 
     for epoch in range(n_epoch):
@@ -190,7 +191,8 @@ if __name__ == '__main__':
         lr_scheduler_G.step()
 
         # 两个生成器和两个判别器
-        torch.save(netG_A2B.state_dict(), "./models/netG_A2B.pth")
-        torch.save(netG_B2A.state_dict(), "./models/netG_B2A.pth")
-        torch.save(netD_A.state_dict(), "./models/netD_A.pth")
-        torch.save(netD_B.state_dict(), "./models/netD_B.pth")
+        if epoch % 10 == 0:
+            torch.save(netG_A2B.state_dict(), "./models/netG_A2B{}.pth".format(epoch))
+            torch.save(netG_B2A.state_dict(), "./models/netG_B2A{}.pth".format(epoch))
+            torch.save(netD_A.state_dict(), "./models/netD_A{}.pth".format(epoch))
+            torch.save(netD_B.state_dict(), "./models/netD_B{}.pth".format(epoch))

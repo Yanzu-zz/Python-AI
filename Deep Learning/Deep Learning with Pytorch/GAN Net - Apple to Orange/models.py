@@ -40,7 +40,7 @@ class Generator(nn.Module):
 
         # 定义下采样模块（downsample）
         in_channel = 64
-        out_channel = in_channel * 1
+        out_channel = in_channel * 2
         for _ in range(2):
             net += [
                 nn.Conv2d(in_channel, out_channel, 3, stride=2, padding=1),
@@ -54,7 +54,7 @@ class Generator(nn.Module):
             net += [resBlock(in_channel)]
 
         # 上采样模块（upsampleing）
-        out_channel = in_channel // 1
+        out_channel = in_channel // 2
         for _ in range(2):
             # 保证我们进行整数倍的上采样
             net += [
@@ -64,7 +64,7 @@ class Generator(nn.Module):
                 nn.ReLU(inplace=True)
             ]
             in_channel = out_channel
-            out_channel = in_channel // 1
+            out_channel = in_channel // 2
 
         # 输出层
         net += [
