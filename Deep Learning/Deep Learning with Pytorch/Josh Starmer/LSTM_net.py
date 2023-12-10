@@ -6,6 +6,7 @@ from torch.optim import Adam
 import lightning as L
 from torch.utils.data import TensorDataset, DataLoader
 
+torch.set_float32_matmul_precision('medium')
 
 class LSTMbyHand(L.LightningModule):
     def __init__(self):
@@ -90,9 +91,10 @@ labels = torch.tensor([0., 1.])
 dataset = TensorDataset(inputs, labels)
 dataloader = DataLoader(dataset)
 
-trainer = L.Trainer(max_epochs=1000)
+trainer = L.Trainer(max_epochs=2000, accelerator="auto", devices="auto")
+trainer.fit(model, train_dataloaders=dataloader)
 path_to_best_checkpoint = trainer.checkpoint_callback.best_model_path
-trainer = L.Trainer(max_epochs=3000)
+trainer = L.Trainer(max_epochs=5000, accelerator="auto", devices="auto")
 trainer.fit(model, train_dataloaders=dataloader, ckpt_path=path_to_best_checkpoint)
 
 print("Now let's compare the observed and predicted value...")
