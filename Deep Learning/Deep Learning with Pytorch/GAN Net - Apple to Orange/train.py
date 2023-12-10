@@ -192,7 +192,8 @@ if __name__ == '__main__':
         lr_scheduler_G.step()
 
         # 两个生成器和两个判别器
-        torch.save(netG_A2B.state_dict(), "./models/netG_A2B.pth")
-        torch.save(netG_B2A.state_dict(), "./models/netG_B2A.pth")
-        torch.save(netD_A.state_dict(), "./models/netD_A.pth")
-        torch.save(netD_B.state_dict(), "./models/netD_B.pth")
+        if epoch % 10 == 0:
+            torch.save(netG_A2B.state_dict(), "./models/netG_A2B{}.pth".format(epoch))
+            torch.save(netG_B2A.state_dict(), "./models/netG_B2A{}.pth".format(epoch))
+            torch.save(netD_A.state_dict(), "./models/netD_A{}.pth".format(epoch))
+            torch.save(netD_B.state_dict(), "./models/netD_B{}.pth".format(epoch))
